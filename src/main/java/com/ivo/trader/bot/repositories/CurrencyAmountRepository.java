@@ -1,9 +1,13 @@
 package com.ivo.trader.bot.repositories;
 
+import com.ivo.trader.bot.records.CurrencyAmount;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -12,6 +16,16 @@ public class CurrencyAmountRepository {
 
     public CurrencyAmountRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    private static final class CurrencyAmountRowMapper implements RowMapper<CurrencyAmount> {
+        @Override
+        public CurrencyAmount mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new CurrencyAmount(
+                    rs.getString("currency"),
+                    rs.getBigDecimal("amount")
+            );
+        }
     }
 
     public BigDecimal getAmountByCurrencyFiat(String currencyCode) {
@@ -29,9 +43,9 @@ public class CurrencyAmountRepository {
         return jdbcTemplate.update(sql, amount, currencyCode);
     }
 
-    public List<String> getAllCurrencyCodesFiat() {
-        String sql = "SELECT currency FROM fiat_currency";
-        return jdbcTemplate.queryForList(sql, String.class);
+    public List<CurrencyAmount> getAllCurrencyFiat() {
+        String sql = "SELECT * FROM fiat_currency";
+        return jdbcTemplate.query(sql, new CurrencyAmountRepository.CurrencyAmountRowMapper());
     }
 
     public BigDecimal getAmountByCurrencyCrypto(String currencyCode) {
@@ -49,8 +63,8 @@ public class CurrencyAmountRepository {
         return jdbcTemplate.update(sql, amount, currencyCode);
     }
 
-    public List<String> getAllCurrencyCodesCrypto() {
-        String sql = "SELECT currency FROM crypto_currency";
-        return jdbcTemplate.queryForList(sql, String.class);
+    public List<CurrencyAmount> getAllCurrencyCrypto() {
+        String sql = "SELECT * FROM crypto_currency";
+        return jdbcTemplate.query(sql, new CurrencyAmountRepository.CurrencyAmountRowMapper());
     }
 }

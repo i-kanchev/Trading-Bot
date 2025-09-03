@@ -24,7 +24,8 @@ public class CurrencyPriceHistoryRepository {
         public CurrencyPriceHistory mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new CurrencyPriceHistory(
                     rs.getString("currency"),
-                    rs.getBigDecimal("price"),
+                    rs.getBigDecimal("price_buy"),
+                    rs.getBigDecimal("price_sell"),
                     rs.getTimestamp("time")
             );
         }
