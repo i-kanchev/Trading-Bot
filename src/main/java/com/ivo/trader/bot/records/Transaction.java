@@ -11,4 +11,5 @@ public record Transaction(
         BigDecimal quantityTo,
         BigDecimal priceTo,
         Timestamp madeAt
-) {}
+) {
+}

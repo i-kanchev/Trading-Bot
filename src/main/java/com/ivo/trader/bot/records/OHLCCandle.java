@@ -3,8 +3,7 @@ package com.ivo.trader.bot.records;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public record OhlcCandle(
-    String currency,
+public record OHLCCandle(
     Timestamp time,
     BigDecimal open,
     BigDecimal high,
@@ -13,4 +12,5 @@ public record OhlcCandle(
     BigDecimal vwap,
     BigDecimal volume,
     Integer trades
-) {}
+) {
+}

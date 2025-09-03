@@ -8,4 +8,5 @@ public record CurrencyPriceHistory(
         BigDecimal priceBuy,
         BigDecimal priceSell,
         Timestamp time
-) {}
+) {
+}

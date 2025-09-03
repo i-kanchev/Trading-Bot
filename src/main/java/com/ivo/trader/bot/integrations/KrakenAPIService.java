@@ -1,14 +1,16 @@
 package com.ivo.trader.bot.integrations;
 
+import com.ivo.trader.bot.records.OHLCCandle;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class KrakenAPIService {
@@ -36,7 +38,7 @@ public class KrakenAPIService {
         }
     }
 
-    public String getCryptoHistory(String currency, Integer interval, Timestamp since) {
+    public String getCryptoOHLCData(String currency, Integer interval, Timestamp since) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(API_URL_OPENING + currency + API_URL_USD
@@ -84,6 +86,46 @@ public class KrakenAPIService {
             return new BigDecimal(price);
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse sell price", e);
+        }
+    }
+
+    public List<OHLCCandle> getCurrencyHistory(String currency, Integer interval, Timestamp since) {
+        try {
+            String json = getCryptoOHLCData(currency, interval, since);
+
+            List<OHLCCandle> candles = new ArrayList<>();
+
+            // Find the start of the array for the first currency pair
+            int start = json.indexOf('[' , json.indexOf('[') + 1);
+            int end = json.indexOf("],\"last\"");
+            String arrayContent = json.substring(start, end);
+
+            // Split into individual candle arrays
+            String[] candleStrings = arrayContent.split("\\],\\[");
+
+            for (String candleStr : candleStrings) {
+                // Clean up brackets
+                candleStr = candleStr.replace("[","").replace("]","");
+                String[] values = candleStr.split(",");
+
+                OHLCCandle candle = new OHLCCandle(
+                        new Timestamp(Long.parseLong(values[0].trim())),
+                        new BigDecimal(values[1].replace("\"","").trim()),
+                        new BigDecimal(values[2].replace("\"","").trim()),
+                        new BigDecimal(values[3].replace("\"","").trim()),
+                        new BigDecimal(values[4].replace("\"","").trim()),
+                        new BigDecimal(values[5].replace("\"","").trim()),
+                        new BigDecimal(values[6].replace("\"","").trim()),
+                        Integer.parseInt(values[7].trim())
+                );
+
+                candles.add(candle);
+            }
+
+            return candles;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse OHLC data", e);
         }
     }
 }
