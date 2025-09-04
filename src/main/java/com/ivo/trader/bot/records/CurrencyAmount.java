@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 public record CurrencyAmount(
         String currency,
-        BigDecimal price
+        BigDecimal amount
 ) {
 }
