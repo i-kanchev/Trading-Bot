@@ -21,7 +21,7 @@ public class CurrencyService {
     }
 
     @Transactional
-    public void buyCurrency(String currencyFiat, String currencyCrypto, @org.jetbrains.annotations.NotNull BigDecimal amountCrypto) throws InvalidCurrencyException, InsufficientAmountException {
+    public void buyCurrency(String currencyFiat, String currencyCrypto, BigDecimal amountCrypto) throws InvalidCurrencyException, InsufficientAmountException {
         BigDecimal amountFiat = amountCrypto.multiply(krakenService.getBuyPrice(currencyCrypto));
 
         try {

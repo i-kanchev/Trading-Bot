@@ -14,6 +14,8 @@ import java.util.List;
 public class CurrencyAmountRepository {
     private final JdbcTemplate jdbcTemplate;
 
+    public static final String MAIN_FIAT_CURRENCY = "USD";
+
     public CurrencyAmountRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
