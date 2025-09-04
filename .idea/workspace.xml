@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a2ab591d-d96c-41f6-af65-7f07cbf8733d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/controllers/TradingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/BotApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/BotApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/controllers/PortfolioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/controllers/PortfolioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/enums/ActionState.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/enums/ActionState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/exceptions/InsufficientAmountException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/exceptions/InsufficientAmountException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/exceptions/InvalidCurrencyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/exceptions/InvalidCurrencyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/integrations/KrakenAPIService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/integrations/KrakenAPIService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/ActionTaken.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/ActionTaken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/CurrencyAmount.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/CurrencyAmount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/CurrencyPriceHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/CurrencyPriceHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/OHLCCandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/OHLCCandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/PerformanceInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/PerformanceInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/records/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/records/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/repositories/CurrencyAmountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/repositories/CurrencyAmountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/repositories/CurrencyPriceHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/repositories/CurrencyPriceHistoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/repositories/PerformanceInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/repositories/PerformanceInfoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/repositories/TransactionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/repositories/TransactionsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/services/CurrencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/services/CurrencyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/services/LiveTradingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/services/LiveTradingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/services/PerformanceInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/services/PerformanceInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/services/PredictionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/services/PredictionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ivo/trader/bot/services/TransactionsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ivo/trader/bot/services/TransactionsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ivo/trader/bot/BotApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/ivo/trader/bot/BotApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Record" />
+        <option value="Exception" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="31yPqNytWyY6uSfVxOy59OecYXE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BotApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ivo39/Desktop/Trading/bot/backend"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.ivo.trader.bot.services" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ivo39\Desktop\Trading\bot\src\main\resources" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a2ab591d-d96c-41f6-af65-7f07cbf8733d" name="Changes" comment="" />
+      <created>1756493538051</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756493538051</updated>
+    </task>
+    <servers />
+  </component>
+</project>
