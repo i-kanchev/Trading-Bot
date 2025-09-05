@@ -25,9 +25,7 @@ public class TrainingService {
         BigDecimal usd = budget;
         BigDecimal crypto = BigDecimal.ZERO;
 
-        List<OHLCCandle> candles = krakenService.getCurrencyHistory(cryptoCode, interval, start, end)
-                .stream().filter(c -> c.time().before(end))
-                .toList();
+        List<OHLCCandle> candles = krakenService.getCurrencyHistory(cryptoCode, interval, start, end);
 
         for (int i = 0; i < candles.size() - 30; i++) {
             List<OHLCCandle> window = candles.subList(i, i + 30);

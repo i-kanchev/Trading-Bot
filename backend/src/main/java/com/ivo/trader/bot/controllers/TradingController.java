@@ -1,6 +1,5 @@
 package com.ivo.trader.bot.controllers;
 
-import com.ivo.trader.bot.exceptions.InsufficientAmountException;
 import com.ivo.trader.bot.services.LiveTradingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +17,6 @@ public class TradingController {
 
     @PostMapping("/trading/live")
     public void trade(@RequestParam Integer interval, @RequestParam Timestamp timestamp) {
-        try {
-            liveTradingService.trade(interval, timestamp);
-        } catch (InsufficientAmountException ignored) {
-            
-        }
+        liveTradingService.trade(interval, timestamp);
     }
 }
