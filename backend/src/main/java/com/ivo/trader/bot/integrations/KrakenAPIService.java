@@ -128,4 +128,12 @@ public class KrakenAPIService {
             throw new RuntimeException("Failed to parse OHLC data", e);
         }
     }
+
+    public List<OHLCCandle> getCurrencyHistory(String currency, Integer interval, Timestamp start, Timestamp end) {
+        String json = getCryptoOHLCData(currency, interval, start);
+
+        List<OHLCCandle> candles = new ArrayList<>();
+
+        return candles;
+    }
 }
