@@ -1,10 +1,7 @@
 package com.ivo.trader.bot.services;
 
-import com.ivo.trader.bot.exceptions.InsufficientAmountException;
-import com.ivo.trader.bot.exceptions.InvalidCurrencyException;
 import com.ivo.trader.bot.integrations.KrakenAPIService;
 import com.ivo.trader.bot.repositories.CurrencyAmountRepository;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,36 +17,32 @@ public class CurrencyService {
         this.krakenService = krakenService;
     }
 
-    @Transactional
-    public void buyCurrency(String currencyFiat, String currencyCrypto, BigDecimal amountCrypto) throws InvalidCurrencyException, InsufficientAmountException {
-        BigDecimal amountFiat = amountCrypto.multiply(krakenService.getBuyPrice(currencyCrypto));
+    public BigDecimal getUsdAmount() {
+        return currencyAmountRepository.getUsdAmount();
+    }
 
-        try {
-            if (currencyAmountRepository.getAmountByCurrencyFiat(currencyFiat).compareTo(amountFiat) <= 0) {
-                throw new InsufficientAmountException("Insufficient amount of money");
-            }
-        }
-        catch (EmptyResultDataAccessException e) {
-            throw new InvalidCurrencyException("Invalid currency");
-        }
-        currencyAmountRepository.decreaseAmountByCurrencyFiat(currencyFiat, amountFiat);
+    public BigDecimal getAmountByCurrencyCrypto(String currencyCode) {
+        return currencyAmountRepository.getAmountByCurrencyCrypto(currencyCode);
+    }
+
+    public void reset() {
+        currencyAmountRepository.resetUsd();
+        currencyAmountRepository.resetAllCrypto();
+    }
+
+    @Transactional
+    public void buyCurrency(String currencyCrypto, BigDecimal amountCrypto) {
+        BigDecimal amountUsd = amountCrypto.multiply(krakenService.getBuyPrice(currencyCrypto));
+
+        currencyAmountRepository.decreaseUsdAmount(amountUsd);
         currencyAmountRepository.increaseAmountByCurrencyCrypto(currencyCrypto, amountCrypto);
     }
 
     @Transactional
-    public void sellCurrency(String currencyFiat, String currencyCrypto, BigDecimal amountCrypto) throws InvalidCurrencyException, InsufficientAmountException {
-        try {
-            if (currencyAmountRepository.getAmountByCurrencyCrypto(currencyCrypto).compareTo(amountCrypto) <= 0) {
-                throw new InsufficientAmountException("Insufficient amount of money");
-            }
-        }
-        catch (EmptyResultDataAccessException e) {
-            throw new InvalidCurrencyException("Invalid currency");
-        }
-
-        BigDecimal amountFiat = amountCrypto.multiply(krakenService.getSellPrice(currencyCrypto));
+    public void sellCurrency(String currencyCrypto, BigDecimal amountCrypto) {
+        BigDecimal amountUsd = amountCrypto.multiply(krakenService.getSellPrice(currencyCrypto));
 
         currencyAmountRepository.decreaseAmountByCurrencyCrypto(currencyCrypto, amountCrypto);
-        currencyAmountRepository.increaseAmountByCurrencyFiat(currencyFiat, amountFiat);
+        currencyAmountRepository.increaseUsdAmount(amountUsd);
     }
 }

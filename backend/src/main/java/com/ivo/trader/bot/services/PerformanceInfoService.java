@@ -27,7 +27,7 @@ public class PerformanceInfoService {
     }
 
     public void addCurrentRevenue() {
-        BigDecimal currRevenue = currencyAmountRepository.getAmountByCurrencyFiat(CurrencyAmountRepository.MAIN_FIAT_CURRENCY);
+        BigDecimal currRevenue = currencyAmountRepository.getUsdAmount();
 
         for (CurrencyAmount crypto : currencyAmountRepository.getAllCurrencyCrypto()) {
             BigDecimal cryptoToFiat = crypto.amount();
@@ -37,5 +37,9 @@ public class PerformanceInfoService {
         }
 
         performanceInfoRepository.addEntry(currRevenue);
+    }
+
+    public void reset() {
+        performanceInfoRepository.reset();
     }
 }

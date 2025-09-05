@@ -20,7 +20,11 @@ public class TransactionsService {
 
     public List<Transaction> getAllTransactionsByCurrency(String currencyCrypto) {
         return transactionsRepository.getAllTransactions().stream()
-                .filter(t -> t.currencyFrom().equals(currencyCrypto) || t.currencyTo().equals(currencyCrypto))
+                .filter(t -> t.currency().equals(currencyCrypto))
                 .toList();
+    }
+
+    public void resetTransactions() {
+        transactionsRepository.reset();
     }
 }
