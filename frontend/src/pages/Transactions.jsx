@@ -1,13 +1,15 @@
 import '../css/Transactions.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Transactions() {
-  const data = [
-    { date: "2025-09-01", action: "Buy", quantity: 10, price: 50, total: 500, profit: 0 },
-    { date: "2025-09-02", action: "Sell", quantity: 5, price: 70, total: 350, profit: 100 },
-    { date: "2025-09-03", action: "Buy", quantity: 8, price: 40, total: 320, profit: 0 },
-    { date: "2025-09-04", action: "Sell", quantity: 8, price: 60, total: 480, profit: 160 },
-    { date: "2025-09-05", action: "Sell", quantity: 3, price: 30, total: 90, profit: -50 },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/transactions')
+      .then(res => setData(res.data))
+      .catch(err => console.error('Error fetching transactions:', err));
+  }, []);
 
   return (
     <div className="transactions-container">
@@ -17,6 +19,7 @@ function Transactions() {
           <tr>
             <th>Date</th>
             <th>Action</th>
+            <th>Crypto</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Total</th>
@@ -24,18 +27,24 @@ function Transactions() {
           </tr>
         </thead>
         <tbody>
-          {data.map((txn, index) => (
-            <tr key={index}>
-              <td>{txn.date}</td>
-              <td>{txn.action}</td>
-              <td>{txn.quantity}</td>
-              <td>${txn.price}</td>
-              <td>${txn.total}</td>
-              <td className={txn.profit >= 0 ? "profit-positive" : "profit-negative"}>
-                ${txn.profit}
-              </td>
-            </tr>
-          ))}
+          {data.map((txn, index) => {
+            const total = txn.quantity * txn.price;
+            const profit = 0; 
+
+            return (
+              <tr key={index}>
+                <td>{new Date(txn.madeAt).toLocaleDateString()}</td>
+                <td>{txn.action}</td>
+                <td>{txn.currency}</td>
+                <td>{txn.quantity}</td>
+                <td>${Number(txn.price).toFixed(2)}</td>
+                <td>${Number(total).toFixed(2)}</td>
+                <td className={profit >= 0 ? "profit-positive" : "profit-negative"}>
+                  ${Number(profit).toFixed(2)}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

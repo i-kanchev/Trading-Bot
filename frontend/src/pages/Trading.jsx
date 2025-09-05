@@ -1,20 +1,21 @@
 import "../css/Trading.css";
 import { useState, useEffect, useRef } from "react";
+import axios from 'axios'
 
 function Trading() {
+  const [data, setData] = useState([]);
+
   const [usd, setUsd] = useState("");
   const [running, setRunning] = useState(false);
   const [started, setStarted] = useState(false);
   const intervalRef = useRef(null);
   const indexRef = useRef(0);
 
-  const data = [
-    { crypto: "BTC", quantity: 10, price: 50, total: 500 },
-    { crypto: "ETH", quantity: 5, price: 70, total: 350 },
-    { crypto: "ADA", quantity: 8, price: 40, total: 320 },
-    { crypto: "XRP", quantity: 8, price: 60, total: 480 },
-    { crypto: "DOGE", quantity: 3, price: 30, total: 90 },
-  ];
+  useEffect(() => {
+    axios.get('http://localhost:8080/trading')
+      .then(res => setData(res.data))
+      .catch(err => console.error('Error fetching crypto information:', err));
+  }, []);
 
   const start = () => {
     if (!running && !started) {
@@ -75,10 +76,10 @@ function Trading() {
         <tbody>
           {data.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.crypto}</td>
-              <td>{entry.quantity}</td>
-              <td>{entry.price}</td>
-              <td>{entry.total}</td>
+              <td>{entry.currency}</td>
+              <td>{entry.amount}</td>
+              <td>{Number(entry.price).toFixed(2)}</td>
+              <td>{Number(entry.amount * entry.price).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

@@ -4,11 +4,14 @@ import com.ivo.trader.bot.records.PerformanceInfo;
 import com.ivo.trader.bot.records.Transaction;
 import com.ivo.trader.bot.services.PerformanceInfoService;
 import com.ivo.trader.bot.services.TransactionsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173")
 
 @RestController
 public class PortfolioController {
@@ -20,12 +23,12 @@ public class PortfolioController {
         this.performanceInfoService = performanceInfoService;
     }
 
-    @GetMapping("performance")
+    @GetMapping("/performance")
     public List<PerformanceInfo> getPerformance() {
         return performanceInfoService.getPerformanceInfo();
     }
 
-    @GetMapping("/portfolio/transactions")
+    @GetMapping("/transactions")
     public List<Transaction> getAllTransactions(@RequestParam(required = false) String currency) {
         if (currency == null) {
             return transactionsService.getAllTransactions();

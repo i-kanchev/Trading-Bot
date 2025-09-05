@@ -1,13 +1,15 @@
 import '../css/Performance.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Performance() {
-  const data = [
-    { date: "2025-09-01", revenue: 500 },
-    { date: "2025-09-02", revenue: 700 },
-    { date: "2025-09-03", revenue: -100 },
-    { date: "2025-09-04", revenue: 450 },
-    { date: "2025-09-05", revenue: 0 },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/performance')
+      .then(res => setData(res.data))
+      .catch(err => console.error('Error fetching performance:', err));
+  }, []);
 
   return (
     <div className="performance-container">
@@ -22,9 +24,9 @@ function Performance() {
         <tbody>
           {data.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.date}</td>
+              <td>{new Date(entry.checkedAt).toLocaleDateString()}</td>
               <td className={entry.revenue >= 0 ? "revenue-positive" : "revenue-negative"}>
-                ${entry.revenue}
+                ${Number(entry.revenue).toFixed(2)}
               </td>
             </tr>
           ))}

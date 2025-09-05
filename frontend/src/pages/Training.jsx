@@ -5,12 +5,13 @@ function Training() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [budget, setBudget] = useState("");
+  const [crypto, setCrypto] = useState("");
   const [finalRevenue, setFinalRevenue] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!startDate || !endDate || !budget) return;
+    if (!startDate || !endDate || !budget || !crypto) return;
 
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -52,6 +53,13 @@ function Training() {
           onChange={(e) => setBudget(e.target.value)}
           min="0"
           step="1"
+        />
+
+        <label>Crypto</label>
+        <input
+          type="text"
+          value={crypto}
+          onChange={(e) => setCrypto(e.target.value)}
         />
 
         <button type="submit">Calculate</button>

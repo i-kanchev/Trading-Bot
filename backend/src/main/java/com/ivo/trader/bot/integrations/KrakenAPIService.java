@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ivo.trader.bot.records.KrakenResponse;
 import com.ivo.trader.bot.records.KrakenTickerResponse;
 import com.ivo.trader.bot.records.OHLCCandle;
+import com.ivo.trader.bot.records.TickerInfo;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class KrakenAPIService {
@@ -76,7 +78,8 @@ public class KrakenAPIService {
             throw new RuntimeException(e);
         }
 
-        return krakenResponse.result().values().stream().findFirst().orElse(List.of()).getFirst();
+        String onlyKey = krakenResponse.result().keySet().iterator().next();
+        return krakenResponse.result().get(onlyKey).b().getFirst();
     }
 
     /**
@@ -94,7 +97,8 @@ public class KrakenAPIService {
             throw new RuntimeException(e);
         }
 
-        return krakenResponse.result().values().stream().findFirst().orElse(List.of()).get(1);
+        String onlyKey = krakenResponse.result().keySet().iterator().next();
+        return krakenResponse.result().get(onlyKey).a().getFirst();
     }
 
     public List<OHLCCandle> getCurrencyHistory(String currency, Integer interval, Timestamp since) {

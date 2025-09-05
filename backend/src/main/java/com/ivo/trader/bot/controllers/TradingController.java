@@ -7,10 +7,7 @@ import com.ivo.trader.bot.services.CurrencyService;
 import com.ivo.trader.bot.services.ExchangeService;
 import com.ivo.trader.bot.services.LiveTradingService;
 import com.ivo.trader.bot.services.TrainingService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -19,6 +16,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+@CrossOrigin(origins = "http://localhost:5173")
 
 @RestController
 public class TradingController {
