@@ -15,6 +15,7 @@ public class CurrencyAmountRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public static final String MAIN_FIAT_CURRENCY = "USD";
+    public static final BigDecimal USD_RESET_VALUE = BigDecimal.valueOf(25000);
 
     public CurrencyAmountRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -30,24 +31,24 @@ public class CurrencyAmountRepository {
         }
     }
 
-    public BigDecimal getAmountByCurrencyFiat(String currencyCode) {
+    public BigDecimal getUsdAmount() {
         String sql = "SELECT amount FROM fiat_currency WHERE currency = ?";
-        return jdbcTemplate.queryForObject(sql, BigDecimal.class, currencyCode);
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class, MAIN_FIAT_CURRENCY);
     }
 
-    public Integer increaseAmountByCurrencyFiat(String currencyCode, BigDecimal amount) {
+    public Integer increaseUsdAmount(BigDecimal amount) {
         String sql = "UPDATE fiat_currency SET amount = amount + ? WHERE currency = ?";
-        return jdbcTemplate.update(sql, amount, currencyCode);
+        return jdbcTemplate.update(sql, amount, MAIN_FIAT_CURRENCY);
     }
 
-    public Integer decreaseAmountByCurrencyFiat(String currencyCode, BigDecimal amount) {
+    public Integer decreaseUsdAmount(String currencyCode, BigDecimal amount) {
         String sql = "UPDATE fiat_currency SET amount = amount - ? WHERE currency = ?";
-        return jdbcTemplate.update(sql, amount, currencyCode);
+        return jdbcTemplate.update(sql, amount, MAIN_FIAT_CURRENCY);
     }
 
-    public List<CurrencyAmount> getAllCurrencyFiat() {
-        String sql = "SELECT * FROM fiat_currency";
-        return jdbcTemplate.query(sql, new CurrencyAmountRepository.CurrencyAmountRowMapper());
+    public void resetUsd() {
+        String sql = "UPDATE fiat_currency SET amount = ? WHERE currency = ?";
+        jdbcTemplate.update(sql, USD_RESET_VALUE, MAIN_FIAT_CURRENCY);
     }
 
     public BigDecimal getAmountByCurrencyCrypto(String currencyCode) {
@@ -55,18 +56,23 @@ public class CurrencyAmountRepository {
         return jdbcTemplate.queryForObject(sql, BigDecimal.class, currencyCode);
     }
 
-    public Integer increaseAmountByCurrencyCrypto(String currencyCode, BigDecimal amount) {
+    public void increaseAmountByCurrencyCrypto(String currencyCode, BigDecimal amount) {
         String sql = "UPDATE crypto_currency SET amount = amount + ? WHERE currency = ?";
-        return jdbcTemplate.update(sql, amount, currencyCode);
+        jdbcTemplate.update(sql, amount, currencyCode);
     }
 
-    public Integer decreaseAmountByCurrencyCrypto(String currencyCode, BigDecimal amount) {
+    public void decreaseAmountByCurrencyCrypto(String currencyCode, BigDecimal amount) {
         String sql = "UPDATE crypto_currency SET amount = amount - ? WHERE currency = ?";
-        return jdbcTemplate.update(sql, amount, currencyCode);
+        jdbcTemplate.update(sql, amount, currencyCode);
     }
 
     public List<CurrencyAmount> getAllCurrencyCrypto() {
         String sql = "SELECT * FROM crypto_currency";
         return jdbcTemplate.query(sql, new CurrencyAmountRepository.CurrencyAmountRowMapper());
+    }
+
+    public void resetCrypto() {
+        String sql = "UPDATE crypto_currency SET amount = 0";
+        jdbcTemplate.update(sql);
     }
 }

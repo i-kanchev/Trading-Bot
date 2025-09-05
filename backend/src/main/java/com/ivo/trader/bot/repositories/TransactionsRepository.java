@@ -21,12 +21,10 @@ public class TransactionsRepository {
         @Override
         public Transaction mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Transaction(
-                    rs.getString("currency_from"),
-                    rs.getBigDecimal("quantity_from"),
-                    rs.getBigDecimal("price_from"),
-                    rs.getString("currency_to"),
-                    rs.getBigDecimal("quantity_to"),
-                    rs.getBigDecimal("price_to"),
+                    rs.getString("currency"),
+                    rs.getBigDecimal("quantity"),
+                    rs.getBigDecimal("price"),
+                    rs.getString("action"),
                     rs.getTimestamp("made_at")
             );
         }
@@ -35,5 +33,10 @@ public class TransactionsRepository {
     public List<Transaction> getAllTransactions() {
         String sql = "SELECT * FROM transactions";
         return jdbcTemplate.query(sql, new TransactionRowMapper());
+    }
+
+    public void reset() {
+        String sql = "TRUNCATE TABLE transactions";
+        jdbcTemplate.update(sql);
     }
 }

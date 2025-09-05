@@ -33,8 +33,13 @@ public class PerformanceInfoRepository {
         return jdbcTemplate.query(sql, new PerformanceInfoRepository.PerformanceInfoRowMapper());
     }
 
-    public Integer addEntry(BigDecimal currentRevenue) {
+    public void addEntry(BigDecimal currentRevenue) {
         String sql = "INSERT INTO performance_info (revenue) VALUES (?)";
-        return jdbcTemplate.update(sql, currentRevenue);
+        jdbcTemplate.update(sql, currentRevenue);
+    }
+
+    public void reset() {
+        String sql = "TRUNCATE TABLE performance_info";
+        jdbcTemplate.update(sql);
     }
 }
