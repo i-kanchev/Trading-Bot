@@ -1,6 +1,4 @@
-package com.ivo.trader.bot.integrations;
-
-import com.ivo.trader.bot.records.OHLCCandle;
+package com.ivo.trader.bot.records;
 
 import java.util.List;
 import java.util.Map;

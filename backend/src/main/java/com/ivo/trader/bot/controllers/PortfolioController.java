@@ -5,7 +5,6 @@ import com.ivo.trader.bot.records.Transaction;
 import com.ivo.trader.bot.services.PerformanceInfoService;
 import com.ivo.trader.bot.services.TransactionsService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,14 +20,9 @@ public class PortfolioController {
         this.performanceInfoService = performanceInfoService;
     }
 
-    @GetMapping("/portfolio/performance")
+    @GetMapping("performance")
     public List<PerformanceInfo> getPerformance() {
         return performanceInfoService.getPerformanceInfo();
-    }
-
-    @PostMapping("/portfolio/performance")
-    public void addCurrentRevenue() {
-        performanceInfoService.addCurrentRevenue();
     }
 
     @GetMapping("/portfolio/transactions")

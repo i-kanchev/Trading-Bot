@@ -1,11 +1,14 @@
 package com.ivo.trader.bot.services;
 
 import com.ivo.trader.bot.integrations.KrakenAPIService;
+import com.ivo.trader.bot.records.CurrencyAmount;
 import com.ivo.trader.bot.repositories.CurrencyAmountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CurrencyService {
@@ -23,6 +26,10 @@ public class CurrencyService {
 
     public BigDecimal getAmountByCurrencyCrypto(String currencyCode) {
         return currencyAmountRepository.getAmountByCurrencyCrypto(currencyCode);
+    }
+
+    public List<CurrencyAmount> getAllCrypto() {
+        return currencyAmountRepository.getAllCurrencyCrypto();
     }
 
     public void reset() {

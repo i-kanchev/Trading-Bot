@@ -29,7 +29,7 @@ public class TransactionsService {
                 .toList();
     }
 
-    public void resetTransactions() {
+    public void reset() {
         transactionsRepository.reset();
     }
 }

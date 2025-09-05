@@ -2,6 +2,8 @@ package com.ivo.trader.bot.integrations;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ivo.trader.bot.records.KrakenResponse;
+import com.ivo.trader.bot.records.KrakenTickerResponse;
 import com.ivo.trader.bot.records.OHLCCandle;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,7 +68,7 @@ public class KrakenAPIService {
         String json = getCryptoTicker(currency);
 
         ObjectMapper mapper = new ObjectMapper();
-        KrakenTickerResponse krakenResponse = null;
+        KrakenTickerResponse krakenResponse;
 
         try {
             krakenResponse = mapper.readValue(json, KrakenTickerResponse.class);
@@ -85,7 +86,7 @@ public class KrakenAPIService {
         String json = getCryptoTicker(currency);
 
         ObjectMapper mapper = new ObjectMapper();
-        KrakenTickerResponse krakenResponse = null;
+        KrakenTickerResponse krakenResponse;
 
         try {
             krakenResponse = mapper.readValue(json, KrakenTickerResponse.class);
@@ -100,7 +101,7 @@ public class KrakenAPIService {
         String json = getCryptoOHLCData(currency, interval, since);
 
         ObjectMapper mapper = new ObjectMapper();
-        KrakenResponse krakenResponse = null;
+        KrakenResponse krakenResponse;
         try {
             krakenResponse = mapper.readValue(json, KrakenResponse.class);
         } catch (JsonProcessingException e) {
@@ -114,7 +115,7 @@ public class KrakenAPIService {
         String json = getCryptoOHLCData(currency, interval, start);
 
         ObjectMapper mapper = new ObjectMapper();
-        KrakenResponse krakenResponse = null;
+        KrakenResponse krakenResponse;
         try {
             krakenResponse = mapper.readValue(json, KrakenResponse.class);
         } catch (JsonProcessingException e) {

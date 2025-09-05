@@ -30,4 +30,11 @@ public class ExchangeService {
         transactionsService.addTransaction(crypto, quantity, price, "sell");
         performanceInfoService.addCurrentRevenue();
     }
+
+    @Transactional
+    public void reset() {
+        currencyService.reset();
+        transactionsService.reset();
+        performanceInfoService.reset();
+    }
 }
