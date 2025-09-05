@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,6 +29,11 @@ public class TransactionsRepository {
                     rs.getTimestamp("made_at")
             );
         }
+    }
+
+    public void addTransaction(String crypto, BigDecimal quantity, BigDecimal price, String action) {
+        String sql = "INSERT INTO transactions (currency, quantity, price, action) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, crypto, quantity, price, action);
     }
 
     public List<Transaction> getAllTransactions() {

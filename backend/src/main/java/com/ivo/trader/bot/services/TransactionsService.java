@@ -4,6 +4,7 @@ import com.ivo.trader.bot.records.Transaction;
 import com.ivo.trader.bot.repositories.TransactionsRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -12,6 +13,10 @@ public class TransactionsService {
 
     public TransactionsService(TransactionsRepository transactionsRepository) {
         this.transactionsRepository = transactionsRepository;
+    }
+
+    public void addTransaction(String crypto, BigDecimal quantity, BigDecimal price, String action) {
+        transactionsRepository.addTransaction(crypto, quantity, price, action);
     }
 
     public List<Transaction> getAllTransactions() {

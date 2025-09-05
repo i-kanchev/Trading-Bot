@@ -3,32 +3,24 @@ package com.ivo.trader.bot.services;
 import com.ivo.trader.bot.enums.ActionState;
 import com.ivo.trader.bot.records.ActionTaken;
 import com.ivo.trader.bot.records.OHLCCandle;
-import com.ivo.trader.bot.integrations.KrakenAPIService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
 public class PredictionService {
-    private final KrakenAPIService krakenService;
+    public PredictionService() {}
 
-    public PredictionService(KrakenAPIService krakenService) {
-        this.krakenService = krakenService;
-    }
-
-    public ActionTaken takeDecision(String currency, Integer interval, Timestamp since) {
+    public ActionTaken takeDecision(List<OHLCCandle> candles) {
         ActionState action;
         double percent = 0.0;
-
-        List<OHLCCandle> candles = krakenService.getCurrencyHistory(currency, interval, since);
 
         double mean = calculateMean(candles);
         double std = calculateStdDev(candles, mean);
 
-        double sma = calculateSMA(candles, candles.size() / 5);
-        double atr = calculateATR(candles, candles.size() / 4);
-        double rsi = calculateRSI(candles, candles.size() / 4);
+        double sma = calculateSMA(candles, candles.size() / 4);
+        double atr = calculateATR(candles, candles.size() / 3);
+        double rsi = calculateRSI(candles, candles.size() / 3);
 
         double close = candles.getLast().close().doubleValue();
 
